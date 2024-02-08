@@ -1,0 +1,43 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Movies</h1>
+
+<%= form_with url: movie_details_path, method: :get do |f| %>
+  <%= f.label :actor, 'Search by Actor:' %>
+  <%= f.text_field :actor %>
+  <%= f.submit 'Search' %>
+<% end %>
+
+<br>
+
+<div id="movies">
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th style="width: 400px;">Description</th>
+        <th>Year</th>
+        <th>Director</th>
+        <th>Actor</th>
+        <th>Location</th>
+        <th>Country</th>
+        <th>Average Stars</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @movie_details.each do |movie_detail| %>
+        <tr>
+          <td><%= movie_detail.movie.title %></td>
+          <td><%= movie_detail.movie.description %></td>
+          <td><%= movie_detail.movie.year %></td>
+          <td><%= movie_detail.movie.director %></td>
+          <td><%= movie_detail.actor %></td>
+          <td><%= movie_detail.location %></td>
+          <td><%= movie_detail.country %></td>
+          <td><%= movie_detail.average_stars %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

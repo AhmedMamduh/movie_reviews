@@ -3,18 +3,32 @@ class ImportMoviesAndReviewsJob
   require 'csv'
 
   def perform(*_args)
+    import_movies
+    import_reviews
+  end
+
+  def import_movies
     CSV.foreach('db/movies.csv', headers: true) do |row|
       hashed_row = row.to_h
 
-      movie = Movie.find_or_create_by(title: hashed_row['Movie'], actor: hashed_row['Actor'], location: hashed_row['Filming location'])
-      movie.update_columns(
+      movie = Movie.find_or_create_by(
+        title: hashed_row['Movie'],
         description: hashed_row['Description'],
         director: hashed_row['Director'],
-        year: hashed_row['Year'],
+        year: hashed_row['Year']
+      )
+
+      next unless movie.present?
+
+      movie.movie_details.find_or_create_by(
+        actor: hashed_row['Actor'],
+        location: hashed_row['Filming location'],
         country: hashed_row['Country']
       )
     end
-    
+  end
+
+  def import_reviews
     CSV.foreach('db/reviews.csv', headers: true) do |row|
       hashed_row = row.to_h
 
@@ -28,4 +42,5 @@ class ImportMoviesAndReviewsJob
       )
     end
   end
+
 end

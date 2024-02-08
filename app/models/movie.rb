@@ -1,10 +1,5 @@
 class Movie < ApplicationRecord
-  has_many :reviews
+  has_many :movie_details, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
-  scope :order_by_average_stars, -> {
-    select('movies.*, AVG(reviews.stars) AS average_stars')
-      .left_joins(:reviews)
-      .group(:id)
-      .order('average_stars DESC NULLS LAST')
-  }
 end
