@@ -2,6 +2,6 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :movies, only: :index
+  root "movies#index"
 end
