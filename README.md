@@ -1,24 +1,43 @@
-# README
+# Movies Reviews Application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a small Ruby on Rails application designed to show movies sorting by reviews rating. It allows users to import movies and reviews data from CSV files, view movies details, search for movies by actor, and sort movies by average rating.
 
-Things you may want to cover:
+### Installation
+1. Clone the repository
 
-* Ruby version
+2. Install dependencies:
+   ```bash
+   bundle install
+   ```
 
-* System dependencies
+3. Setup the database:
+   ```bash
+   rails db:create
+   rails db:migrate
+   ```
 
-* Configuration
+4. Start the Sidekiq server:
+   ```bash
+   bundle exec sidekiq
+   ```
 
-* Database creation
+5. Start the server:
+   ```bash
+   rails s
+   ```
 
-* Database initialization
+6. Importing data:
+   ```bash
+   rails import:csv
+   ```
 
-* How to run the test suite
+## Usage
 
-* Services (job queues, cache servers, search engines, etc.)
+### Viewing Movies
+You can view all movies by visiting the `localhost:3000` route.
 
-* Deployment instructions
+### Searching by Actor
+To search for movies by actor, enter the actor's name in the search form available on the movies index page `localhost:3000`.
 
-* ...
+### Sorting by Average Rating
+Movies is sorted by average rating (stars) in descending order.
